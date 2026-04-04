@@ -96,3 +96,6 @@ Then replace the `src/` folder with the provided source files.
 | GET | /get-preferences | Return all learned preferences |
 | POST | /override-device | Manual device override from UI |
 | GET | /current-state | Get current simulated device state |
+
+# Emotion-Aware-Smart-Environment-
+Human environments (homes, study spaces) are static, while emotions are dynamic. Stress, fatigue, and distraction reduce productivity and mental well-being, but current systems fail to understand and adapt to human emotions in real time.
