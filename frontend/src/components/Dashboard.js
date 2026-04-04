@@ -193,6 +193,8 @@ export default function Dashboard() {
       ? "light_color"
       : device === "fan"
         ? "fan_speed"
+        : device === "music"
+          ? "music_genre"
         : device === "display_brightness"
           ? "display_brightness"
         : device === "notifications"
@@ -202,6 +204,7 @@ export default function Dashboard() {
     setCurrentAction((prev) => ({
       ...prev,
       [key]: value,
+      ...(device === "music" ? { music_url: result.music_url ?? prev?.music_url } : {}),
       ...(result.hardware_supported === false ? { hardware_supported: false } : {}),
     }));
   }

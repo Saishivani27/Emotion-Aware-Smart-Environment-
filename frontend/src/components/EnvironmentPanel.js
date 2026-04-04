@@ -3,11 +3,12 @@ import { overrideDevice } from "../api/apiService";
 
 const FAN_SPEEDS = ["off", "low", "medium", "high"];
 const FAN_LEVEL = { off: 0, low: 33, medium: 66, high: 100 };
-const MUSIC_GENRES = ["Upbeat Pop", "Calm Acoustic", "Lo-fi / Ambient", "Light Jazz", "Upbeat", "Soft Instrumental", "None"];
+const MUSIC_GENRES = ["Upbeat Pop", "Calm Acoustic", "Lo-fi / Ambient", "Grounding Ambient", "Light Jazz", "Upbeat", "Soft Instrumental", "None"];
 const MUSIC_VISUALS = {
   "Upbeat Pop": { accent: "#ff7d6d", glow: "rgba(255, 125, 109, 0.35)", tagline: "Bright vocals and high-energy rhythm" },
   "Calm Acoustic": { accent: "#8bb7ff", glow: "rgba(139, 183, 255, 0.28)", tagline: "Soft strings for a calm, supportive mood" },
   "Lo-fi / Ambient": { accent: "#86e6d1", glow: "rgba(134, 230, 209, 0.28)", tagline: "Low-pressure soundscape for focus and decompression" },
+  "Grounding Ambient": { accent: "#ff9874", glow: "rgba(255, 152, 116, 0.25)", tagline: "Steady atmospheric sound to reduce agitation and cool the mood" },
   "Light Jazz": { accent: "#f3b35f", glow: "rgba(243, 179, 95, 0.28)", tagline: "Smooth background music for balanced comfort" },
   Upbeat: { accent: "#7ae582", glow: "rgba(122, 229, 130, 0.28)", tagline: "Fast lift in energy and alertness" },
   "Soft Instrumental": { accent: "#c79bff", glow: "rgba(199, 155, 255, 0.28)", tagline: "Gentle instrumental layering for restfulness" },
