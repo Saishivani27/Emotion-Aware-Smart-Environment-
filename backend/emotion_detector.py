@@ -32,10 +32,20 @@ def detect_emotion(base64_image):
                 "dominant_emotion": "neutral",
                 "confidence": 0.0,
                 "all_scores": {},
-                "error": "Could not decode image"
+                "error": "Could not decode image",
+                "face_detected": False
             }
 
-        prepared_face = extract_primary_face(img)
+        prepared_face, face_detected = extract_primary_face(img)
+        if not face_detected:
+            return {
+                "dominant_emotion": "neutral",
+                "confidence": 0.0,
+                "all_scores": {},
+                "error": "No facial detection",
+                "face_detected": False
+            }
+
         variants = build_analysis_variants(prepared_face)
         aggregated_scores = analyze_variants(variants)
 
@@ -50,7 +60,8 @@ def detect_emotion(base64_image):
             "dominant_emotion": dominant_emotion,
             "confidence": round(float(confidence), 2),
             "all_scores": {k: round(float(v), 2) for k, v in aggregated_scores.items()},
-            "error": None
+            "error": None,
+            "face_detected": True
         }
 
     except Exception as e:
@@ -58,7 +69,8 @@ def detect_emotion(base64_image):
             "dominant_emotion": "neutral",
             "confidence": 50.0,
             "all_scores": {},
-            "error": str(e)
+            "error": str(e),
+            "face_detected": False
         }
 
 
@@ -72,7 +84,7 @@ def extract_primary_face(img):
     )
 
     if len(faces) == 0:
-        return cv2.resize(img, (224, 224), interpolation=cv2.INTER_CUBIC)
+        return None, False
 
     x, y, w, h = max(faces, key=lambda face: face[2] * face[3])
     pad_x = int(w * 0.18)
@@ -83,7 +95,7 @@ def extract_primary_face(img):
     y2 = min(img.shape[0], y + h + pad_y)
 
     cropped = img[y1:y2, x1:x2]
-    return cv2.resize(cropped, (224, 224), interpolation=cv2.INTER_CUBIC)
+    return cv2.resize(cropped, (224, 224), interpolation=cv2.INTER_CUBIC), True
 
 
 def build_analysis_variants(face_img):

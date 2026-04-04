@@ -29,6 +29,17 @@ def detect_emotion_endpoint():
         return jsonify({"error": "No image provided"}), 400
 
     detection = detect_emotion(data["image"])
+    if not detection.get("face_detected", True):
+        return jsonify({
+            "emotion": None,
+            "confidence": 0.0,
+            "all_scores": {},
+            "action": None,
+            "session_id": None,
+            "face_detected": False,
+            "detection_error": detection.get("error", "No facial detection")
+        })
+
     emotion = detection["dominant_emotion"]
     confidence = detection["confidence"]
     all_scores = detection["all_scores"]
@@ -43,6 +54,7 @@ def detect_emotion_endpoint():
         "all_scores": all_scores,
         "action": action,
         "session_id": session_id,
+        "face_detected": True,
         "detection_error": detection.get("error")
     })
 

@@ -168,6 +168,10 @@ export default function Dashboard() {
     setStatus("🔍 Detecting...");
     try {
       const result = await detectEmotion(screenshot);
+      if (result.face_detected === false) {
+        setStatus("⚠️ No facial detection. Center your face and try again.");
+        return;
+      }
       applyDetectionResult(result, autoDetect ? "auto" : "manual");
     } catch (e) {
       setStatus(`❌ Error: ${e.message}`);
