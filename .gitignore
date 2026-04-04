@@ -1,0 +1,8 @@
+.venv/
+frontend/node_modules/
+frontend/build/
+backend/__pycache__/
+backend/*.db
+debug_frames/
+*.log
+*.zip
